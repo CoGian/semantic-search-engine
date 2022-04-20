@@ -37,12 +37,14 @@ with open('dataset.json', 'r') as fin:
 			continue
 
 		paper = dict()
+		paper['title'] = doc['title']
+		paper['abstract'] = doc['paperAbstract']
 		paper['local_link'] = filename
 		embedding = model.encode(sentences=[doc['title'] + ' ' + doc['paperAbstract']])[0]
 		paper['embedding'] = embedding
 		paper['id'] = doc['id']
 		papers.append(paper)
-		if index == 1000:
+		if index == 1050:
 			break
 
 ps_connector.populate_db(papers)

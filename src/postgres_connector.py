@@ -9,6 +9,8 @@ class Paper(Base):
 	__tablename__ = 'Paper'
 
 	id = Column(String, primary_key=True)
+	title = Column(String)
+	abstract = Column(String)
 	local_link = Column(String, nullable=False)
 	embedding = Column(Vector(768), nullable=False)
 
