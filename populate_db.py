@@ -21,14 +21,14 @@ with open('config/postgres.yaml', 'r') as config_file:
 	config = yaml.load(config_file, Loader=yaml.FullLoader)
 
 ps_connector = PostgresConnector(config)
-model = SentenceTransformer('sentence-transformers/all-distilroberta-v1')
+model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
 
 if not os.path.exists('papers'):
 	os.mkdir('papers')
 
 papers = []
 with open('dataset.json', 'r') as fin:
-	for line in tqdm(fin):
+	for index, line in tqdm(enumerate(fin)):
 		doc = json.loads(line)
 		try:
 			filename = wget.download(doc['pdfUrl'], out='papers/')
@@ -36,10 +36,13 @@ with open('dataset.json', 'r') as fin:
 			print(e)
 			continue
 
-		paper = {'local_link': filename}
+		paper = dict()
+		paper['local_link'] = filename
 		embedding = model.encode(sentences=[doc['title'] + ' ' + doc['paperAbstract']])[0]
 		paper['embedding'] = embedding
 		paper['id'] = doc['id']
 		papers.append(paper)
+		if index == 1000:
+			break
 
 ps_connector.populate_db(papers)

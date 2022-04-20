@@ -1,7 +1,7 @@
 langdetect==1.0.9
 pyspark==3.2.1
 wget==3.2
-psycopg2==2.7.7
+psycopg2==2.9.3
 tqdm==4.64.0
 config==0.5.1
 PyYAML==6.0
