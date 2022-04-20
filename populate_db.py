@@ -6,6 +6,16 @@ from tqdm import tqdm
 import yaml
 from src.postgres_connector import PostgresConnector
 
+import ssl
+
+try:
+	_create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+	# Legacy Python that doesn't verify HTTPS certificates by default
+	pass
+else:
+	# Handle target environment that doesn't support HTTPS verification
+	ssl._create_default_https_context = _create_unverified_https_context
 
 with open('config/postgres.yaml', 'r') as config_file:
 	config = yaml.load(config_file, Loader=yaml.FullLoader)
@@ -22,7 +32,8 @@ with open('dataset.json', 'r') as fin:
 		doc = json.loads(line)
 		try:
 			filename = wget.download(doc['pdfUrl'], out='papers/')
-		except Exception:
+		except Exception as e:
+			print(e)
 			continue
 
 		paper = {'local_link': filename}
