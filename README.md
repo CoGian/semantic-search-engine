@@ -10,4 +10,5 @@ psql -U postgres
 
 CREATE DATABASE sem_search;
 
+uvicorn src.api:app --reload
 

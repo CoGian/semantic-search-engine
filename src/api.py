@@ -1,10 +1,11 @@
+import os
 from typing import Optional
 from scipy.spatial import distance
 import yaml
 from fastapi import FastAPI
 from pydantic import BaseModel
 from sentence_transformers import SentenceTransformer
-
+import webbrowser
 from src.postgres_connector import PostgresConnector
 
 app = FastAPI()
@@ -39,6 +40,11 @@ async def search(query: Query):
 		'local_link': paper.local_link} for index, paper in enumerate(reranked_papers)}
 
 	return reranked_papers
+
+
+@app.get("/open_file")
+async def open_file(local_link: str):
+	webbrowser.open_new("file://" + os.path.abspath(local_link))
 
 
 def rerank(query, papers, query_embedding):
