@@ -26,12 +26,20 @@ class PostgresConnector:
 			conn.execute(text('CREATE EXTENSION IF NOT EXISTS vector'))
 			conn.commit()
 
-		Base.metadata.drop_all(engine)
-		Base.metadata.create_all(engine)
 		self.engine = engine
 
 	def populate_db(self, papers):
+		Base.metadata.drop_all(self.engine)
+		Base.metadata.create_all(self.engine)
 		session = Session(self.engine)
 		session.bulk_insert_mappings(Paper, papers)
 		session.commit()
 		session.close()
+
+	def get_k_results(self, query_embedding, k=5):
+		session = Session(self.engine)
+		papers = session.query(Paper)\
+			.order_by(Paper.embedding.l2_distance(query_embedding))\
+			.limit(k)\
+			.all()
+		return papers
