@@ -26,7 +26,6 @@ class Query(BaseModel):
 	text: str
 	k: int = 10
 	distance_metric: Optional[str] = 'cosine'
-	present_paper: Optional[bool] = False
 
 
 @app.get("/")

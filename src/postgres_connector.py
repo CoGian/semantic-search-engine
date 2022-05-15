@@ -27,10 +27,9 @@ class PostgresConnector:
 			conn.commit()
 
 		self.engine = engine
-		self.create_index()
 
 	def create_index(self, distance='vector_ip_ops'):
-		index = Index('my_index', Paper.embedding,
+		index = Index('inner_product_index', Paper.embedding,
 					  postgresql_using='ivfflat',
 					  postgresql_with={'lists': 100},
 					  postgresql_ops={'factors': distance}
@@ -44,6 +43,8 @@ class PostgresConnector:
 		session.bulk_insert_mappings(Paper, papers)
 		session.commit()
 		session.close()
+
+		self.create_index()
 
 	def get_k_results(self, query_embedding, k=5):
 		session = Session(self.engine)

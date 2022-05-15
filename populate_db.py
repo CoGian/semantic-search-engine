@@ -1,3 +1,5 @@
+import re
+
 import wget
 import json
 import os
@@ -31,6 +33,10 @@ with open('dataset.json', 'r') as fin:
 	for index, line in tqdm(enumerate(fin)):
 		doc = json.loads(line)
 		try:
+
+			if not re.search('pdf', doc['pdfUrl']):
+				doc['pdfUrl'] = re.sub('abs', 'pdf', doc['pdfUrl'])
+
 			filename = wget.download(doc['pdfUrl'], out='papers/')
 		except Exception as e:
 			print(e)
