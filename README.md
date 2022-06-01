@@ -1,14 +1,8 @@
-# semantic-search-engine
-
-docker pull ankane/pgvector
-
-docker run -d -p 5432:5432 --name sem_search_postgres -e POSTGRES_PASSWORD=password ankane/pgvector
-
-docker exec -it sem_search_postgres bash
-
-psql -U postgres
-
-CREATE DATABASE sem_search;
-
-uvicorn src.api:app --reload
-
+1. Clone Github repo:
+   1. git clone git@github.com:CoGian/semantic-search-engine.git
+2. Change directory to the repo’s directory
+   1. cd semantic-search-engine
+3. Download postgresql dump and and istall all the dependencies needed :
+   1. sh install.sh
+4. Run application:
+   1. uvicorn src.api:app --reload
