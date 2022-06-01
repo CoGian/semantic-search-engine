@@ -7,9 +7,3 @@ pip install -r requirements.txt
 docker pull ankane/pgvector
 docker run -d -p 5432:5432 --name sem_search_postgres -e POSTGRES_PASSWORD=password ankane/pgvector
 docker cp sem_search_export.pgsql sem_search_postgres:/sem_search_export.pgsql
-docker exec -it sem_search_postgres bash
-psql -U postgres
-CREATE DATABASE sem_search;
-exit
-psql -U postgres sem_search < sem_search_export.pgsql
-exit
