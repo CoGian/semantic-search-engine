@@ -4,6 +4,7 @@ unzip papers.zip
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+python -m nltk.downloader stopwords
 docker pull ankane/pgvector
 docker run -d -p 5432:5432 --name sem_search_postgres -e POSTGRES_PASSWORD=password ankane/pgvector
 docker cp sem_search_export.pgsql sem_search_postgres:/sem_search_export.pgsql
