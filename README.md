@@ -3,7 +3,7 @@
 2. Change directory to the repo’s directory
    1. cd semantic-search-engine
 3. Download postgresql dump and and istall all the dependencies needed :
-   1. sh install.sh
+   1. bash install.sh
 4. Open terminal inside docker container:
    1. docker exec -it sem_search_postgres bash
 5. Connect to postgres:
