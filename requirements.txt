@@ -1,7 +1,7 @@
 langdetect==1.0.9
 pyspark==3.2.1
 wget==3.2
-psycopg2==2.9.3
+psycopg2-binary==2.9.3
 tqdm==4.64.0
 config==0.5.1
 PyYAML==6.0
@@ -12,3 +12,4 @@ pydantic==1.9.0
 scipy==1.7.3
 nltk==3.7
 rapidfuzz==2.0.10
+sentence-transformers==2.2.0
