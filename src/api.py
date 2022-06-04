@@ -49,3 +49,13 @@ async def search(query: Query):
 @app.get("/open_file")
 async def open_file(local_link: str):
     webbrowser.open_new("file://" + os.path.abspath(local_link))
+
+
+def start():
+    import uvicorn
+
+    uvicorn.run(app, host="127.0.0.1", port=8000)
+
+
+if __name__ == "__main__":
+    start()
