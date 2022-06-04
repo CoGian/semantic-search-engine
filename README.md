@@ -1,6 +1,6 @@
 1. Clone Github repo:
    1. git clone https://github.com/CoGian/semantic-search-engine.git
-2. Download & install Postgres
+2. Download & install PostgreSQL
 3. Change directory to the repo’s directory
    1. cd semantic-search-engine
 4. Download postgresql dump and and istall all the dependencies needed :
