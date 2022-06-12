@@ -16,3 +16,5 @@
 9. Run application:
    1. source venv/bin/activate
    2. uvicorn src.api:app --reload
+
+It is recommended to have a Linux-based OS, Python 3.7+ and docker.
